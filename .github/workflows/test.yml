@@ -1,0 +1,27 @@
+name: test formulae
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  terminal-pet:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tap this checkout
+        run: |
+          mkdir -p "$(brew --repository)/Library/Taps/zezoo123"
+          ln -s "$PWD" "$(brew --repository)/Library/Taps/zezoo123/homebrew-tap"
+      - name: Audit
+        run: brew audit --strict --online zezoo123/tap/terminal-pet
+      - name: Install from source
+        run: brew install --build-from-source zezoo123/tap/terminal-pet
+      - name: Test
+        run: brew test zezoo123/tap/terminal-pet
+      - name: Smoke
+        run: |
+          terminal-pet --version
+          terminal-pet pets
+          terminal-pet setup --shell zsh --print
