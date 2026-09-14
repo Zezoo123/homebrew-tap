@@ -1,8 +1,8 @@
 class TerminalPet < Formula
   desc "Animated pixel-art pet that lives on your terminal window and reacts to your shell"
   homepage "https://github.com/Zezoo123/terminal-pet"
-  url "https://github.com/Zezoo123/terminal-pet/archive/refs/tags/v0.2.1.tar.gz"
-  sha256 "1d46e85195e9dceccf74e1dc02c8972c603d718e5d6161ef588489f88b65e93e"
+  url "https://github.com/Zezoo123/terminal-pet/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "e4b281e3007700c785fdbc7dd08b309d78e68efa61f08babbcb7bfb0afdad043"
   license "MIT"
   head "https://github.com/Zezoo123/terminal-pet.git", branch: "main"
 
