@@ -6,6 +6,29 @@ on:
   pull_request:
 
 jobs:
+  aura:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-15, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tap this checkout
+        run: |
+          mkdir -p "$(brew --repository)/Library/Taps/zezoo123"
+          ln -s "$PWD" "$(brew --repository)/Library/Taps/zezoo123/homebrew-tap"
+      - name: Audit
+        run: brew audit --strict --online zezoo123/tap/aura
+      - name: Install from source
+        run: brew install --build-from-source zezoo123/tap/aura
+      - name: Test
+        run: brew test zezoo123/tap/aura
+      - name: Smoke
+        run: |
+          aura --version
+          aura --help
+
   terminal-pet:
     strategy:
       fail-fast: false
